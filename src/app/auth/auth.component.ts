@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnDestroy, ViewChild } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -14,7 +14,7 @@ import * as AuthActions from './store/auth.actions';
     selector: 'app-auth',
     templateUrl: './auth.component.html'
 })
-export class AuthComponent implements OnDestroy {
+export class AuthComponent implements OnInit, OnDestroy {
     isLoginMode = true;
     isLoading = false;
     error: string = null;
@@ -27,6 +27,13 @@ export class AuthComponent implements OnDestroy {
         private componentFactoryResolver: ComponentFactoryResolver,
         private store: Store<fromApp.AppState>
     ) {}
+
+    ngOnInit() {
+        this.store.select('auth').subscribe(authState => {
+            this.isLoading = authState.loading;
+            this.error = authState.authError;
+        });
+    }
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
@@ -49,8 +56,8 @@ export class AuthComponent implements OnDestroy {
         } else {
             authObs = this.authService.signup(email, password);
         }
-
-        authObs.subscribe(resData => {
+        
+       /*  authObs.subscribe(resData => {
             console.log(resData);
             this.isLoading = false;
             this.router.navigate(['/recipes']);
@@ -60,7 +67,7 @@ export class AuthComponent implements OnDestroy {
             this.error = errorMessage;
             this.showErrorAlert(errorMessage);
             this.isLoading = false;
-        });
+        }); */
 
         form.reset();
     }
