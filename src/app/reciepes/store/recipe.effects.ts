@@ -46,7 +46,7 @@ export class RecipeEffects {
         );
 
     constructor(
-        private actions$: Actions, 
-        private http: HttpClient, 
+        private actions$: Actions,
+        private http: HttpClient,
         private store: Store<fromApp.AppState>) {}
 }

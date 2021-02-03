@@ -12,7 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import * as fromApp from './store/app.reducer';
-
 import { AuthEffects } from './auth/store/auth.effects';
 import { environment } from '../environments/environment';
 import { RecipeEffects } from './reciepes/store/recipe.effects';
@@ -33,7 +32,6 @@ import { RecipeEffects } from './reciepes/store/recipe.effects';
     SharedModule,
     CoreModule
   ],
-  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
